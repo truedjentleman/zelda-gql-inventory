@@ -1,0 +1,85 @@
+
+""" Add record (row) in DB """
+
+mutation create_character {
+  david: insertcharacters (
+    value: {
+			character_id: "44444444-4444-4444-4444-444444444444"
+      name: "David"
+      current_health: 6
+      max_health: 6
+      speed: 1
+      stamina: 10
+      weapon_slot: "d19d6fb-8992-4191-9357-0630a1dd5ed1"
+      shield_slot: "d8af93bd-31af-4ba1-a9d4-e646ef1f9960"
+      
+    }
+  ) { 
+    value {    """  return the value to check if all updated """
+      name
+    }   
+  }
+}
+
+
+""" Create QUERY """
+query find_character_by_id {
+    characters (value: {name: "Andrew"}) {    """ searching for {name: "Andrew"} in the 'characters' table and return back 'character_id' and 'name' and other fields (optional) """
+        values {
+            character_id,
+            name,
+            current_health,
+            max_health,
+            stamina,
+            speed,
+            weapon_slot,
+            shield_slot
+        }
+    }
+}
+
+
+
+""" UPDATE DATA  - character with specified id"""
+
+mutation you_got_a_heart {
+  updatecharacters(
+    value: {
+      character_id: "11111111-1111-1111-1111-111111111111"
+      max_health: 7
+      current_health: 7
+    }
+  ) {
+    value {      """  return the value to check if all updated """
+      max_health
+    }
+  }
+}
+
+mutation equip_weapon {
+  updatecharacters(
+    value: {
+      character_id: "11111111-1111-1111-1111-111111111111"
+      weapon_slot: "ad19d6fb-8992-4191-9357-0630a1dd5ed1"
+    }
+  ) {
+    value {
+      weapon_slot
+    }
+  }
+}
+
+
+""" DELETE DATA """
+#  delete character with specified id
+mutation drop_character {
+  deletecharacters(
+    value: {
+      character_id: "11111111-1111-1111-1111-111111111111"
+    }
+  ) {
+    value {
+      character_id
+    }
+  }
+}
